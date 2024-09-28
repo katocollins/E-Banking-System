@@ -2,6 +2,14 @@ const request = require("supertest");
 const express = require("express");
 const mongoose = require("mongoose");
 const Account = require("../models/accountModel");
+const {
+  createAccount,
+  deleteAccount,
+  getAccount,
+  transfer,
+  deposit,
+  withdraw,
+} = require("../controllers/accountController");
 const app = express();
 
 // Use the actual app setup here
