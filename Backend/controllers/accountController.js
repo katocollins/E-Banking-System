@@ -15,7 +15,10 @@ const createAccount = async (req, res, next) => {
       client_id: account.client_id,
       account_id: account.id,
     };
-    next();
+    res
+      .status(200)
+      .json({ client_id: account.client_id, balance: account.balance });
+    // next();
   } catch (error) {
     if (error.message.match(/(Balance|Account|id)/gi)) {
       return res.status(400).send(error.message);
