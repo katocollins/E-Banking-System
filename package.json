@@ -1,7 +1,7 @@
 {
   "name": "sprints-mern-e-banking-system",
   "version": "1.0.0",
-  "description": "",
+  "description": "<h1 id=\"title\" align=\"center\">Sprints-MERN-E-Banking-System</h1>",
   "main": "Backend/server.js",
   "scripts": {
     "both": "concurrently \"npm:dev\" \"npm:dev2\"",
@@ -24,7 +24,11 @@
     "mongoose-plugin-autoinc": "^1.1.9"
   },
   "devDependencies": {
+    "@eslint/js": "^9.11.1",
     "concurrently": "^7.2.1",
+    "eslint": "^9.11.1",
+    "eslint-plugin-react": "^7.37.0",
+    "globals": "^15.9.0",
     "nodemon": "^2.0.16"
   }
 }
