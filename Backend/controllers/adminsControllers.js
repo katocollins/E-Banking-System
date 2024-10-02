@@ -52,7 +52,7 @@ const adminLogin = async (req, res) => {
         name: admin.admin_name,
         email: admin.email,
         role: admin.role,
-        token: generateAdminsToken(admin.id, admin.email, admin.role),
+        // token: generateAdminsToken(admin.id, admin.email, admin.role),
       });
     } else {
       return res.status(404).send("Wrong Credintials - wrong password");

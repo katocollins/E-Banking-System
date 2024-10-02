@@ -89,7 +89,7 @@ const userLogin = async (req, res) => {
         id: user.id,
         name: user.name,
         email: user.email,
-        token: generateUsersToken(user.id, user.email),
+        // token: generateUsersToken(user.id, user.email),
       });
     } else {
       return res.status(404).send("Wrong Credintials - wrong password");

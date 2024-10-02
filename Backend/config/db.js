@@ -1,3 +1,6 @@
+process.env.MONGO_URI = "mongodb://localhost:27017/BankingSystem";
+process.env.CORS_DOMAINS = "http://localhost:3000";
+
 const mongoose = require("mongoose");
 
 mongoose.set("strictQuery", false);
