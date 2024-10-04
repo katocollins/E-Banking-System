@@ -50,7 +50,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Set up SSH key to access the staging server securely
+      # Setting up SSH key to access the staging server securely
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.7.0
         with:
