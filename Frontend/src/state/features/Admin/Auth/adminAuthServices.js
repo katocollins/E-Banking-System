@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL =
   process.env.NODE_ENV === "production"
-    ? "https://ebank-2t3r.onrender.com/api/admins/"
+    ? "http://localhost:3000/api/admins/"
     : "http://localhost:5000/api/admins/";
 
 //Login Admin
@@ -26,7 +26,7 @@ const adminLogout = () => {
 const getAdmin = async (adminData) => {
   const res = await axios.get(API_URL + adminData.id, {
     headers: {
-      authorization: `Bearer ${adminData.token}`,
+      "Authorization": `Bearer ${adminData.token}`,
     },
   });
   const data = res.data;
@@ -38,7 +38,7 @@ const getAdmin = async (adminData) => {
 const updateAdmin = async (adminData) => {
   const res = await axios.put(API_URL + adminData.id, adminData, {
     headers: {
-      authorization: `Bearer ${adminData.token}`,
+      "Authorization": `Bearer ${adminData.token}`,
     },
   });
   const data = res.data;

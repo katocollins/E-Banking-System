@@ -52,7 +52,7 @@ const adminLogin = async (req, res) => {
         name: admin.admin_name,
         email: admin.email,
         role: admin.role,
-        // token: generateAdminsToken(admin.id, admin.email, admin.role),
+        token: generateAdminsToken(admin.id, admin.email, admin.role),
       });
     } else {
       return res.status(404).send("Wrong Credintials - wrong password");
@@ -119,7 +119,7 @@ const createAdmin = async (req, res) => {
 //     if (error.message.match(/(email|password|name|role)/gi)) {
 //       return res.status(400).send(error.message);
 //     }
-
+//
 //     res.status(500).send("Ooops!! Something Went Wrong, Try again...");
 //   }
 // };
@@ -227,7 +227,7 @@ module.exports = {
   getAdmins,
   getOneAdmin,
   createAdmin,
-  // createFirstAdmin,
+  //createFirstAdmin,
   adminLogin,
   updateAdmin,
   updateOwner,

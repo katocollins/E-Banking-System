@@ -1,4 +1,4 @@
-process.env.MONGO_URI = "mongodb://localhost:27017/BankingSystem";
+process.env.MONGO_URI = "mongodb+srv://ckato:Ckato141%40@e-bank.mj9hv.mongodb.net/?retryWrites=true&w=majority&appName=E-Bank";
 process.env.CORS_DOMAINS = "http://localhost:3000";
 
 const mongoose = require("mongoose");
