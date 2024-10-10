@@ -71,7 +71,7 @@ jobs:
             npm install
 
             # Restart the application (using pm2, docker, etc.)
-            pm2 restart your-app-name || pm2 start npm --name "your-app-name" -- start
+            pm2 restart E-BANKING-SYSTEM || pm2 start npm --name "E-BANKING-SYSTEM" -- start
 
             echo "Deployment completed successfully."
           EOF
