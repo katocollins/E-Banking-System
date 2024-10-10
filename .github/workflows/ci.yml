@@ -61,7 +61,7 @@ jobs:
         run: |
           echo "Starting deployment to staging..."
           ssh -o StrictHostKeyChecking=no user@staging-server 'bash -s' << 'EOF'
-            cd /path/to/your/app
+            cd /E-Banking-System
 
             # Pull the latest changes from the main branch
             git fetch --all
@@ -70,8 +70,8 @@ jobs:
             # Install any new dependencies
             npm install
 
-            # Restart the application (using pm2, docker, etc.)
-            pm2 restart E-BANKING-SYSTEM || pm2 start npm --name "E-BANKING-SYSTEM" -- start
+            # Restart the application (using pm2, docker)
+            pm2 restart sprints-mern-e-banking-system || pm2 start npm --name "sprints-mern-e-banking-system" -- start
 
             echo "Deployment completed successfully."
           EOF
