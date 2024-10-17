@@ -19,7 +19,7 @@ jobs:
         node-version: '16'
 
     - name: Navigate to backend folder
-      run: cd backend
+      run: cd Backend
 
     - name: Install backend dependencies
       run: npm install
@@ -47,7 +47,7 @@ jobs:
         node-version: '16'
 
     - name: Navigate to frontend folder
-      run: cd frontend
+      run: cd Frontend
 
     - name: Install frontend dependencies
       run: npm install
