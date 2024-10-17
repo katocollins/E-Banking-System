@@ -44,7 +44,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16'
+        node-version: '22.1.0'
 
     - name: Navigate to frontend folder
       run: cd Frontend
@@ -53,7 +53,10 @@ jobs:
       run: npm install
 
     - name: Build frontend
-      run: npm run build-prod
+      run: npm run build
+
+    - name: Show build log
+      run: cat /home/runner/.npm/_logs/*.log
 
     - name: Deploy to Azure App Service (Frontend)
       uses: azure/webapps-deploy@v2
