@@ -53,7 +53,7 @@ jobs:
       run: npm install
 
     - name: Build frontend
-      run: npm run build
+      run: npm run dev
 
     - name: Deploy to Azure App Service (Frontend)
       uses: azure/webapps-deploy@v2
