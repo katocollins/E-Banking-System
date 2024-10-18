@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL =
   process.env.NODE_ENV === "production"
-    ? "http://localhost:3000/api/request/"
+    ? "https://ebank-backend-ckd5b9a3dcf9hmh0.southafricanorth-01.azurewebsites.net/api/request/"
     : "http://localhost:5000/api/request/";
 
 const CREATE_ACCOUNT_API_URL =
