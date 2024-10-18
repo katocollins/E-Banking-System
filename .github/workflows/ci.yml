@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build_backend:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,51 +16,20 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16'
+        node-version: '18'
 
-    - name: Navigate to backend folder
-      run: cd Backend
-
-    - name: Install backend dependencies
+    - name: Install dependencies for both backend and frontend
       run: npm install
 
-    - name: Build backend (if necessary)
-      run: npm run build || echo "No build step needed for backend"
-
-    - name: Deploy to Azure App Service (Backend)
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ebank-backend
-        slot-name: production
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_BACKEND }}
-
-  build_frontend:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '22.1.0'
-
-    - name: Navigate to frontend folder
-      run: cd Frontend
-
-    - name: Install frontend dependencies
-      run: npm install
-
-    - name: Build frontend
+    - name: Build frontend (this will build both backend and frontend based on your heroku-postbuild script)
       run: npm run heroku-postbuild
 
     - name: Show build log
       run: cat /home/runner/.npm/_logs/*.log
 
-    - name: Deploy to Azure App Service (Frontend)
+    - name: Deploy to Azure App Service (Single App Service for both backend and frontend)
       uses: azure/webapps-deploy@v2
       with:
-        app-name: e-bank
+        app-name: ebank-app
         slot-name: production
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_FRONTEND }}
