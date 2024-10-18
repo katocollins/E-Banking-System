@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL =
   process.env.NODE_ENV === "production"
-    ? "https://ebank-backend-ckd5b9a3dcf9hmh0.southafricanorth-01.azurewebsites.net/api/users/"
+    ? "https://e-bank-e6axb4b0hsbccugq.southafricanorth-01.azurewebsites.net/api/users/"
     : "http://localhost:5000/api/users/";
 
 //Get All Users
