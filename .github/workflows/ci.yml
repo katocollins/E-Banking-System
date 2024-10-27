@@ -1,4 +1,4 @@
-name: MERN Stack Build and Deploy
+name: MERN Stack Test, Build and Deploy
 
 on:
   push:

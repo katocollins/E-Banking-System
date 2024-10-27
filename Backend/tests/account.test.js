@@ -25,7 +25,7 @@ app.put("/api/account/withdraw/:id", withdraw);
 
 beforeAll(async () => {
   // Connect to a test database
-  await mongoose.connect("mongodb://localhost/test_db", {
+  await mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
