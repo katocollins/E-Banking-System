@@ -25,10 +25,13 @@ app.put("/api/account/withdraw/:id", withdraw);
 
 beforeAll(async () => {
   // Connect to a test database
-  await mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  await mongoose.connect(
+    "mongodb+srv://ckato:Ckato141%40@e-bank.mj9hv.mongodb.net/?retryWrites=true&w=majority&appName=E-Bank",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  );
 });
 
 afterAll(async () => {
