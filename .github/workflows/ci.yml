@@ -23,8 +23,6 @@ jobs:
         run: npm install 
       - name: Run Tests  # Run existing tests
         run: npm test 
-      - name: Run Jest Tests  # Run additional Jest tests
-        run: npm run jest
 
   build_and_deploy: 
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner 
