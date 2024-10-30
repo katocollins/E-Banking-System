@@ -1,22 +1,24 @@
-name: MERN Stack Test, Build and Deploy
+name: MERN Stack Test, Build, and Deploy
 
 on:
   push:
     branches:
       - main
+      - staging
   pull_request:
     branches:
       - main
+      - staging
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checout code
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Node JS
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "18"
@@ -27,10 +29,10 @@ jobs:
       - name: Run Tests
         run: npm test
 
-  build_and_deploy:
+  build_and_deploy_staging:
     runs-on: ubuntu-latest
     needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/staging'
 
     steps:
       - name: Checkout code
@@ -44,25 +46,61 @@ jobs:
       - name: Install dependencies for both backend and frontend
         run: npm install
 
-      - name: Build frontend (this will build both backend and frontend based on your heroku-postbuild script)
+      - name: Build frontend (for Heroku postbuild script)
+        run: npm run heroku-postbuild
+
+      - name: Deploy to Azure App Service (Staging Environment)
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ebank-backend # Use a different Azure App Service for staging
+          slot-name: staging
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_BACKEND }}
+
+      - name: Rollback on Deployment Failure (Staging)
+        if: failure()
+        run: |
+          echo "Staging Deployment Failed, Rolling Back..."
+          ssh -o StrictHostKeyChecking=no user@staging-server 'bash -s' << 'EOF'
+           cd /E-Banking-System
+           git reset --hard origin/staging
+           pm2 restart e-bank-staging || pm2 start npm --name e-bank-staging -- start 
+          EOF
+
+  build_and_deploy_production:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+
+      - name: Install dependencies for both backend and frontend
+        run: npm install
+
+      - name: Build frontend (for Heroku postbuild script)
         run: npm run heroku-postbuild
 
       - name: Show build log
         run: cat /home/runner/.npm/_logs/*.log
 
-      - name: Deploy to Azure App Service (Single App Service for both backend and frontend)
+      - name: Deploy to Azure App Service (Production Environment)
         uses: azure/webapps-deploy@v2
         with:
-          app-name: e-bank
+          app-name: e-bank # Production app service
           slot-name: production
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_FRONTEND }}
 
-      - name: Rollback on Deployment Failure
+      - name: Rollback on Deployment Failure (Production)
         if: failure()
         run: |
-          echo "Deployment Failed, Rolling Back..."
-
-          ssh -o StrictHostKeyChecking=no user@staging-server 'bash -s' << 'EOF'
+          echo "Production Deployment Failed, Rolling Back..."
+          ssh -o StrictHostKeyChecking=no user@production-server 'bash -s' << 'EOF'
            cd /E-Banking-System
            git reset --hard origin/main
            pm2 restart e-bank || pm2 start npm --name e-bank -- start 
