@@ -2,6 +2,7 @@ require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
+const client = require('prom-client');
 
 const app = express();
 
@@ -58,3 +59,24 @@ connectToMongoose()
   .catch((err) => {
     console.log(err);
   });
+// Enable default metrics collection (e.g., CPU, memory)
+const register = new client.Registry();
+client.collectDefaultMetrics({ register });
+
+// Custom application metrics example
+const requestCounter = new client.Counter({
+  name: 'http_requests_total',
+  help: 'Total number of HTTP requests made',
+});
+
+// Increment counter each time a request is received
+app.use((req, res, next) => {
+  requestCounter.inc();
+  next();
+});
+
+// Route to expose metrics
+app.get('/metrics', async (req, res) => {
+  res.set('Content-Type', register.contentType);
+  res.send(await register.metrics());
+});
