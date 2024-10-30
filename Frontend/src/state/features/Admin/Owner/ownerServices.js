@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL =
   process.env.NODE_ENV === "production"
-    ? "http://localhost:3000/api/admins/"
+    ? "https://e-bank-e6axb4b0hsbccugq.southafricanorth-01.azurewebsites.net/api/admins/"
     : "http://localhost:5000/api/admins/";
 
 //Register Admin

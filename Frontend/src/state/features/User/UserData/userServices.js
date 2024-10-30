@@ -2,12 +2,12 @@ import axios from "axios";
 
 const API_URL =
   process.env.NODE_ENV === "production"
-    ? "http://localhost:3000/api/users/"
+    ? "https://e-bank-e6axb4b0hsbccugq.southafricanorth-01.azurewebsites.net/api/users/"
     : "http://localhost:5000/api/users/";
 
 const API_URL_REQUEST =
   process.env.NODE_ENV === "production"
-    ? "http://localhost:3000/api/request/create"
+    ? "https://e-bank-e6axb4b0hsbccugq.southafricanorth-01.azurewebsites.net/api/request/create"
     : "http://localhost:5000/api/request/create";
 
 //Get User
