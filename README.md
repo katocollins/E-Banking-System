@@ -7,7 +7,7 @@
 
 <h2>🚀 Demo</h2>
 
-[https://ebank-2t3r.onrender.com](https://e-bank-e6axb4b0hsbccugq.southafricanorth-01.azurewebsites.net/)
+[Press me to go to demo site](https://e-bank-e6axb4b0hsbccugq.southafricanorth-01.azurewebsites.net/)
 
 <h2>Project Screenshots:</h2>
 
