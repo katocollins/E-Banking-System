@@ -3,6 +3,8 @@ const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const client = require('prom-client');
+//const cors = require("cors");
+
 
 const app = express();
 
@@ -14,8 +16,8 @@ const { connectToMongoose } = require("./config/db");
 app.use(express.json());
 
 //cors middleware
-const { corsProOptions } = require("./config/corsConfig");
-app.use(cors(corsProOptions));
+//const { corsProOptions } = require("./config/corsConfig");
+//app.use(cors(corsProOptions));
 
 // Apply the rate limiting middleware to API calls only
 const {
